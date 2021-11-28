@@ -1,5 +1,5 @@
 <?php
-
+use App\Models\Empleado;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,6 +20,13 @@ Route::get('/empleados', [App\Http\Controllers\EmpleadoController::class, 'index
 Route::get('/empleados/create', [App\Http\Controllers\EmpleadoController::class, 'create'])->name('empleados.create');
 Route::post('/empleados/store', [App\Http\Controllers\EmpleadoController::class, 'store'])->name('empleados.store');
 Route::get('/empleados/show/{id}', [App\Http\Controllers\EmpleadoController::class, 'show'])->name('empleados.show');
-Route::get('/empleados/edit/{id}', [App\Http\Controllers\EmpleadoController::class, 'edit'])->name('empleados.edit');
+//Route::get('/empleados/edit/{id}', [App\Http\Controllers\EmpleadoController::class, 'edit'])->name('empleados.edit');
 Route::put('/empleados/update/{id}', [App\Http\Controllers\EmpleadoController::class, 'update'])->name('empleados.update');
 Route::delete('/empleados/delete/{id}', [App\Http\Controllers\EmpleadoController::class, 'delete'])->name('empleados.delete');
+
+Route::get('/empleados/edit/{id}', function ($id) {
+    $empleado = Empleado::find($id);
+     foreach($empleado as $em){
+        return $em->id;
+    }
+});
